@@ -34,6 +34,7 @@ header img {
 }
 
 #header-welcome-box {
+	padding-top:100px;
     position: relative;
     transform: translateY(25%);
     width: 500px;
@@ -127,12 +128,12 @@ header img {
     color: #e5e5e5;
 }
 #form-ul{
-    position: relative;
-    height: 60%;
+    /* position: relative;
+    height: 60%; */
     padding-left:90px;
     padding-right:90px;
     padding-bottom:60px;
-}
+} 
 /* #step-ul li{
 	position: relative;
     float: left;
@@ -165,9 +166,9 @@ header img {
 }
 
 
-/* .select_menu>option{
-    border:0px;
-} */
+.select_menu{
+   zindex:10;
+}
 
 #inputUser {
     position: relative;
@@ -211,7 +212,7 @@ header img {
 #article-select-price {
     position: relative;
     float: left;
-    margin-top: 15%;
+    margin-top: 5%;
     margin-bottom: 5%;
     padding: 0px;
     width: 100%;
@@ -349,10 +350,10 @@ p {
 
 .btn-plus,
 .btn-minus {
-
     color: white;
-    width: 25%;
-    height: 30px;
+    width: 140px;
+    height: 38px;
+    font-size:20px;
 }
 
 .btn-plus {

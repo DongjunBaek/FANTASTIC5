@@ -43,7 +43,6 @@ $(document).ready(function () {
                 printing and typesetting industry. Lorem<br>
                 Ipsum has been the industry's</p>
                 <a href="<%=request.getContextPath() %>/test/memberMypage.jsp">MYPAGE테스트용링크</a>
-                <a href="<%=request.getContextPath() %>/test/memberEnrollSuccess.jsp">로그인성공테스트용링크</a>
             </div>
             <form action="<%=request.getContextPath() %>/main/mainfunction" method="get">
             <div class="main_skil1">

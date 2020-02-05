@@ -24,11 +24,10 @@
                     <input type="button" id="btn_join" value="JOIN" onclick="location.href='<%=request.getContextPath()%>/member/memberEnrollView'">
                 </div>
                 <% } else { %>
-                <%-- 로그인한 경우 --%>
+                <%-- 로그인하지 않은 경우 --%>
                 <div class="rigth_select">
-                	<%-- <p><%=memberLoggedIn.getMemberName() %>님</p> --%>
                     <input type="button" id="btn_login" value="LOGOUT" onclick="location.href='<%=request.getContextPath()%>/member/memberLogoutView'">
-                    <input type="button" id="btn_join" value="MYPAGE" onclick="location.href='<%=request.getContextPath()%>/member/memberPageView?memberId=<%=memberLoggedIn.getMemberId()%>'">
+                    <input type="button" id="btn_join" value="MYPAGE" onclick="location.href='<%=request.getContextPath()%>/member/memberPageView'">
                 </div>
                 <% } %>
             </div>

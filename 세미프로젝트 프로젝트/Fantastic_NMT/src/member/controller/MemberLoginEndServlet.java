@@ -61,18 +61,18 @@ public class MemberLoginEndServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60 * 30);
 			
 			/////////////////////쿠키 설정하고 아이디저장
-			String saveId = request.getParameter("saveId");
-			System.out.println("saveId@servlet="+saveId);
+			//String saveId = request.getParameter("saveId");
+			//System.out.println("saveId@servlet="+saveId);
 			
-			Cookie c = new Cookie("saveId", memberId);
-			c.setPath("/"); //도메인 전역에서 쿠키 사용
-			if(saveId != null) { //아이디 저장에 체크한 경우
-				c.setMaxAge(7 * 24 * 60 * 60); //7일 영속쿠키
-			}
-			else { //아이디 저장에 체크해제한 경우
-				c.setMaxAge(0); //세션쿠키
-			}
-			response.addCookie(c);
+			//Cookie c = new Cookie("saveId", memberId);
+			//c.setPath("/"); //도메인 전역에서 쿠키 사용
+			//if(saveId != null) { //아이디 저장에 체크한 경우
+			//	c.setMaxAge(7 * 24 * 60 * 60); //7일 영속쿠키
+			//}
+			//else { //아이디 저장에 체크해제한 경우
+			//	c.setMaxAge(0); //세션쿠키
+			//}
+			//response.addCookie(c);
 			
 			//로그인 후 홈페이지로 리다이렉트
 			response.sendRedirect(request.getContextPath());

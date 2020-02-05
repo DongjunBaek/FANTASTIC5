@@ -3,25 +3,6 @@
 <%
 	String msg = (String)request.getAttribute("msg");
 	String loc = (String)request.getAttribute("loc");
-	
-	Cookie[] cookies = request.getCookies();
-	boolean saveIdChecked = false;
-	String memberId = "";
-	
-	
-	if(cookies != null){
-		for(Cookie c : cookies){
-			String name = c.getName();
-			String value = c.getValue();
-			System.out.println(name + "="+value);
-			if("saveId".equals(name)){
-				saveIdChecked = true;
-				memberId = value;
-			}
-		}
-	}
-	
-	
 %>
 <!-- 민희
 	만든날짜 : 200202
@@ -73,7 +54,7 @@ function loginValidate(){
             <p class="kor">먼저 로그인을 해주세요</p><br/>
             <p class="kor login-label">아이디</p>
             <input type="text" name="memberId" id="memberId"  class="kor"
-                   placeholder="아이디를 입력하세요" value="<%=saveIdChecked==true?memberId:""%>"/>
+                   placeholder="아이디를 입력하세요"/>
             <% if(msg == "존재하지 않는 아이디입니다."){ %>
             <p class="kor hidden-space"><%=msg %></p>
             <% } %>
@@ -85,8 +66,8 @@ function loginValidate(){
             <% } %>
             <div id="float-form">
            		 <div class="checkbox_wrap">
-                    <label class="saveId-container kor float" for="saveId">아이디 저장
-                        <input type="checkbox" name="saveId" id="saveId" <%=saveIdChecked==true?"checked":"" %>>
+                    <label class="saveId-container kor float">아이디 저장
+                        <input type="checkbox">
                         <span class="saveId-checkmark"></span>
                     </label>
                 </div>

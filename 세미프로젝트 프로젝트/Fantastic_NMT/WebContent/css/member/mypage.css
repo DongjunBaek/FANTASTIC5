@@ -1,6 +1,4 @@
 /* body */
-.kor {font-family: 'Noto Sans KR', sans-serif; }
-.eng {font-family: 'Josefin Sans', sans-serif; }
 body{
     padding: 0px;
     margin: 0px;
@@ -26,7 +24,6 @@ li{
 }
 #mypage-header-text{
     margin: 0px;
-    padding-top: 50px;
     position: relative;
     top: 20%;
     transform: translateY(-50%);
@@ -105,7 +102,7 @@ li{
     text-align: left;
     font-size: 20px;
     left: 7%;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 20px;
 
 }
@@ -121,15 +118,14 @@ li{
 .myinfo-box-div span:nth-child(3){
     display: block;
     position: absolute;
-    right: 10%;
+    right: 7%;
     font-size: 30px;
     text-align: right;
-    top:115px;
+    top:100px;
 }
 
 .myinfo-box-div button{
     display: block;
-     margin-top: 20px;
     position: relative;
     left: 7%;
     font-size: 14px;
@@ -327,15 +323,10 @@ li{
     margin-top: 0px;
     margin-bottom: 10px;
 }
-.nim { margin-left: 10px;}
 .mypage-welcome-name{
     font-size: 65px;
     font-weight: bold;
 }
 .margin-top{
-    margin-top:45px;
-}
-.mypage-totalmoney{
-	font-family: 'Noto Sans KR', sans-serif;;;
-	font-weight: 800;
+    margin-top:20px;
 }

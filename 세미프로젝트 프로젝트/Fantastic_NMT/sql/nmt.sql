@@ -11,7 +11,7 @@ grant connect, resource to nmt;
 --====================================
 
 CREATE TABLE "NMT_MEMBER" (
-	"MEMBER_CODE"	NUMBER		NOT NULL, 
+	"MEMBER_CODE"	NUMBER		NOT NULL,
 	"MEMBER_ID"	VARCHAR2(300)		NULL,
 	"MEMBER_PASSWORD"	VARCHAR2(300)		NULL,
 	"MEMBER_PHONE"	CHAR(11)		NOT NULL,
@@ -19,20 +19,8 @@ CREATE TABLE "NMT_MEMBER" (
 	"MEMBER_ADDRESS"	VARCHAR2(150)		NULL,
 	"MEMBER_REGDATE"	DATE	DEFAULT SYSDATE	NOT NULL,
 	"MEMBER_MILE"	NUMBER		NULL,
-	"MEMBER_BIRTH"	DATE		NULL,
-    "MEMBER_NAME" VARCHAR2(15) NOT NULL
+	"MEMBER_BIRTH"	DATE		NULL
 );
-
- 
-  delete from nmt_member where member_id = 'abcde1234';
-insert into nmt_member values(00000001,'admin','admin','01012341234','admin@naver.com','서울시 강남구',default,100000,to_date('19000909'),'관리자');
-insert into nmt_member values(00000007,'abcde1234','abcde1234','01012341234','admin@naver.com','서울시 강남구',default,0,to_date('19001111'),'테스트');
-
-commit;
-
-alter table nmt_member drop column member_name;
-Alter table nmt_member add member_name varchar2(15) not null;
-select * from  nmt_member;
 
 CREATE TABLE "NMT_BOARD" (
 	"BOARD_NO"	NUMBER		NOT NULL,
@@ -56,6 +44,8 @@ CREATE TABLE "NMT_SALES" (
 	"P_TOTAL_PRICE"	NUMBER		NULL,
 	"P_DATE"	DATE	DEFAULT SYSDATE	NULL
 );
+
+insert into nmt_member values(00000001, 'admin','admin','01012341234','admin@naver.com','서울시 강남구',default,100000,to_date('19000909'));
 
 CREATE TABLE "NMT_PRODUCT" (
 	"P_CODE"	VARCHAR2(100)		NOT NULL,

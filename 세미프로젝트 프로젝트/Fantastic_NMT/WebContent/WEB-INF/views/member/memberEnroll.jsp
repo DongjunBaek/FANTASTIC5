@@ -101,7 +101,7 @@ input[id=birthday2],input[id=birthday3]{
   background-color: #ED4848;
 }
 p.checkmsg{
-  color:#ed4848;
+  color:red;
 }
 /* footer{
 	margin-top:1300px;
@@ -116,59 +116,6 @@ nav{
 width:610px;
 }
 </style>
-<script>
-function duplicate(){
-	
-	return true
-}
-$(function(){
-	$("#memberId").keyup(function(){
-		let memberId = $("#memberId").val();
-		
-		let msg = "";
-		let regex = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,11}$/;
-		
-		if(!regex.test(memberId) || memberId ==''){
-			msg = "사용불가능한 형식의 아이디입니다.";
-			$("#checkId").html(msg).css("color","#ed4848");
-		}else{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/enroll/EnrollDuplicate.do",
-				data:{memberId:memberId},
-				dataType:"text",
-				success:data=>{
-					msg = data;
-					if("이미 사용중인 아이디입니다." == msg){
-						$("#checkId").html(data).css("color","#ed4848");
-					}else{
-						$("#checkId").html(data).css("color","#4EC407");
-					}
-				},
-				error:(x,s,e)=>{
-					console.log(x,s,e);
-				}
-			});
-		}
-	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-});
-
-
-</script>
 </head>
 <body>
 	<header>
@@ -187,10 +134,10 @@ $(function(){
             <p class="servetitle">노머니 트립의 멤버가 되어주세요</p><br>
           </div>
       <div class="insection">
-        <form action="" method="post" onsubmit="return duplicate();">
+        <form action="">
           <p class="pclass">아이디</p>
-          <input type="text" name="memberId" id="memberId" placeholder="영문자숫자로이루어진 6~12자리">
-          <p class="checkmsg" id="checkId"></p>
+          <input type="text" name="memberId" id="memberId" placeholder="아이디를 입력하세요">
+          <p class="checkmsg">사용가능한아이디입니다.</p>
           <p class="pclass">비밀번호</p>
           <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요">
           <p class="checkmsg">대소문자 포함 8~12자리</p>

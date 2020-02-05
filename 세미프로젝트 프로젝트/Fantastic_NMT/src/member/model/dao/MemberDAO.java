@@ -60,7 +60,6 @@ public class MemberDAO {
 				m.setEnrollDate(rset.getDate("member_regdate"));
 				m.setMile(rset.getDouble("member_mile"));
 				m.setBirthDay(rset.getDate("member_birth"));
-				m.setMemberName(rset.getString("member_name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

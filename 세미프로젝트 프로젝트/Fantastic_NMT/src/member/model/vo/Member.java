@@ -23,7 +23,6 @@ public class Member implements Serializable {
 	private Date enrollDate;
 	private double mile;
 	private Date birthDay;
-	private String memberName;
 	
 	//생성자
 	public Member() {
@@ -32,7 +31,7 @@ public class Member implements Serializable {
 
 	//파라미터생성자
 	public Member(int mcode, String memberId, String password, String phone, String email, String address,
-			Date enrollDate, double mile, Date birthDay, String memberName) {
+			Date enrollDate, double mile, Date birthDay) {
 		super();
 		this.mcode = mcode;
 		this.memberId = memberId;
@@ -43,15 +42,12 @@ public class Member implements Serializable {
 		this.enrollDate = enrollDate;
 		this.mile = mile;
 		this.birthDay = birthDay;
-		this.memberName = memberName;
 	}
-	
 
 	//getter/setter
 	public int getMcode() {
 		return mcode;
 	}
-
 
 	public void setMcode(int mcode) {
 		this.mcode = mcode;
@@ -124,22 +120,12 @@ public class Member implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
 
 	@Override
 	public String toString() {
 		return "Member [mcode=" + mcode + ", memberId=" + memberId + ", password=" + password + ", phone=" + phone
 				+ ", email=" + email + ", address=" + address + ", enrollDate=" + enrollDate + ", mile=" + mile
-				+ ", birthDay=" + birthDay + ", memberName=" + memberName + "]";
+				+ ", birthDay=" + birthDay + "]";
 	}
-
-
 	
 }
