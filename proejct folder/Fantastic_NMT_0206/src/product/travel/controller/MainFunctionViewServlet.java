@@ -23,13 +23,17 @@ public class MainFunctionViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//view단에 뿌려줄 파라미터값
-		String city = request.getParameter("city");
+		String depart = request.getParameter("depart");
+		String arrive = request.getParameter("arrive");
 		String days = request.getParameter("days");
 		String price = request.getParameter("price");
 		
 		
+		System.out.println(depart +", "+arrive +", "+days +", "+price);
+		
 		//view단
-		request.setAttribute("city", city);
+		request.setAttribute("depart", depart);
+		request.setAttribute("arrive", arrive);
 		request.setAttribute("days", days);
 		request.setAttribute("price", price);
 		request.getRequestDispatcher("/WEB-INF/views/travelpackage/mainfunction.jsp").forward(request, response);

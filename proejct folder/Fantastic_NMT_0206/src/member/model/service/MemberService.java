@@ -21,4 +21,31 @@ public class MemberService {
 		return m;
 	}
 
+	public int memberInsert(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().memberInsert(conn,m);
+		close(conn);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+	
+	public int updateMember(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().updateMember(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

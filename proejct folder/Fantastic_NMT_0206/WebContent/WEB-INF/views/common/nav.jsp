@@ -12,9 +12,9 @@
                 onclick="location.href='<%=request.getContextPath()%>/'">
                 <div class="left_select">
                     <ul>
-                        <li>search</li>
-                        <li>notice</li>
-                        <li>review</li>
+                        <li id="searchli">search</li>
+                        <li id="noticeli">notice</li>
+                        <li id="reviewli">review</li>
                     </ul>
                 </div>
                <% if(memberLoggedIn == null) { %>
@@ -34,3 +34,11 @@
             </div>
         </div>
     </nav>
+    <script>
+    $(function(){
+    	$("#searchli").click(function(){
+    		location.href="<%=request.getContextPath()%>/main/mainfunction";
+    	});
+    });
+    
+    </script>

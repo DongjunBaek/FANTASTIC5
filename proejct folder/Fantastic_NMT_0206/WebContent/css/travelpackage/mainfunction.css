@@ -5,8 +5,11 @@ body {
     /* background: black; */
     font-family: 'Josefin Sans', sans-serif;
     font-family: 'Noto Sans KR', sans-serif;
+    
 }
-
+body input, body button, body select{
+	outline:none;
+}
 li {
     list-style: none;
 }
@@ -363,6 +366,23 @@ p {
 .btn-minus {
     background-color: lightgray;
 }
+
+.btn-plus1,
+.btn-minus1 {
+    color: white;
+    width: 140px;
+    height: 38px;
+    font-size:20px;
+}
+
+.btn-plus1 {
+    background-color: #ed4848;
+}
+
+.btn-minus1 {
+    background-color: lightgray;
+}
+
 .airRadio{
     position: relative;
     float: left;

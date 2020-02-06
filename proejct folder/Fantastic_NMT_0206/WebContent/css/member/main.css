@@ -138,25 +138,36 @@ body{
 }
 #select_nation{
     outline: 0;
-    border: 0;
-    background-color: white;
     color: #3b3b3b;
-    width: 280px;
+    
+    width: 250px;
     height: 55px;
-    font-size: 16px;
-    margin-right: 68px;
-
+    margin-right: 5%;
+    padding-left: 1%;
+    font-size: 1em;
+    background: url(/NMT/images/mainfunction/optionBG.jpg) no-repeat;
+    background-size: 100% 98%;
+    cursor: pointer;
+    -webkit-appearance: none;
+    left: 6%;
+    border: 0px;
 }
 #select_city{
     outline: 0;
-    border: 0;
-    background-color: white;
     color: #3b3b3b;
-    width: 280px;
+   margin-left:50px;
+    width: 250px;
     height: 55px;
-    font-size: 16px;
-    margin-right: 68px;
-}
+    margin-right: 5%;
+    padding-left: 1%;
+    font-size: 1em;
+    background: url(/NMT/images/mainfunction/optionBG.jpg) no-repeat;
+    background-size: 100% 98%;
+    cursor: pointer;
+    -webkit-appearance: none;
+    left: 6%;
+    border: 0px;
+    }
 
 .select_2 h2{
     font-size: 20px;
@@ -165,13 +176,20 @@ body{
     margin-bottom: 15px;
 }
 #select_days{
-    outline: 0;
-    border: 0;
-    background-color: white;
+   outline: 0;
     color: #3b3b3b;
-    width: 150px;
+   margin-left:50px;
+    width: 250px;
     height: 55px;
-    font-size: 16px;
+    margin-right: 5%;
+    padding-left: 1%;
+    font-size: 1em;
+    background: url(/NMT/images/mainfunction/optionBG.jpg) no-repeat;
+    background-size: 100% 98%;
+    cursor: pointer;
+    -webkit-appearance: none;
+    left: 6%;
+    border: 0px;
 }
 .main_skil2{
     /* border: 1px solid red; */

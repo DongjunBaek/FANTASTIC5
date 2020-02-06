@@ -71,4 +71,72 @@ public class MemberDAO {
 		return m;
 	}
 
+	public int memberInsert(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("memberInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getPassword());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getAddress());
+			pstmt.setDate(6, m.getBirthDay());
+			pstmt.setString(7, m.getMemberName());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	//민희 / 200206 / 회원정보수정 
+	public int updateMember(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateMember");
+		//여기까진 됨
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getAddress());
+			pstmt.setDate(3, m.getBirthDay());
+			pstmt.setString(4, m.getEmail());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setString(6, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			System.out.println("DAOResult="+result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

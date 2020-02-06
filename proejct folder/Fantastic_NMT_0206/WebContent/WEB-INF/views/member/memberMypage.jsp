@@ -16,9 +16,6 @@
 }
 </style>
 <script>
-function updateMember(){
-	
-}
 function deleteMember(){
 	
 }
@@ -53,7 +50,7 @@ function deleteMember(){
                     <h1 class="mypage-welcome-msg">안녕하세요</h1>
                     <span class="mypage-welcome-name"><%=m.getMemberName() %></span><span class="mypage-welcome-msg nim">님</span>
                     <br>
-                    <button class="btn-all margin-top" onclick="updateMember();">회원정보 수정</button> <br><br>
+                    <button class="btn-all margin-top" onclick="location.href='<%=request.getContextPath() %>/member/memberUpdateView?memberId=<%=memberLoggedIn.getMemberId()%>'">회원정보 수정</button> <br><br>
                     <button class="btn-all" onclick="deleteMember();">회원 탈퇴</button>
                 </div>
                 <div class="myinfo-box bggray">

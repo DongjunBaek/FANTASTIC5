@@ -6,21 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import member.model.service.MemberService;
+import member.model.vo.Member;
 /**
  * @author Minhee
-	만든날짜 : 200203
-	목적 : 로그아웃서블릿 (세션무효화)
- *
+ * 생성날짜 : 200205
+ * 생성목적 : mypage에서 정보수정페이지로 넘어가는 서블릿
  */
-@WebServlet("/member/memberLogoutView")
-public class MemberLogoutViewServlet extends HttpServlet {
+@WebServlet("/member/memberUpdateView")
+public class MemberUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MemberLogoutViewServlet() {
+    
+    public MemberUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +28,29 @@ public class MemberLogoutViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				//해당 세션이 존재하면, 그 세션을 리턴하고, 존재하지 않으면 null을 리턴 
-				HttpSession session = request.getSession(false);
-				
-				//세션이 존재하는 경우, 무효화처리함.
-				//세션에 속성으로 담긴 값도 무효화됨.
-				if(session != null) session.invalidate();
-				
-				response.sendRedirect(request.getContextPath());
+		String memberId = request.getParameter("memberId");
+		
+		Member m = new MemberService().selectOne(memberId);
+		
+		String view = "";
+		
+		if(m != null) {
+			view = "/WEB-INF/views/member/memberUpdate.jsp";
+			request.setAttribute("member", m);
+			System.out.println("member@sevlet="+m);
+		}
+		else {
+			view = "/WEB-INF/views/common/msg.jsp";
+			String loc = "/";
+			String msg = "해당 회원은 존재하지 않습니다.";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+		}
+		
+		request.getRequestDispatcher(view)
+			   .forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -42,32 +42,30 @@ $(document).ready(function () {
                 <p>Lorem Ipsum is simply dummy text of the<br>
                 printing and typesetting industry. Lorem<br>
                 Ipsum has been the industry's</p>
-                <a href="<%=request.getContextPath() %>/test/memberMypage.jsp">MYPAGE테스트용링크</a>
-                <a href="<%=request.getContextPath() %>/test/memberEnrollSuccess.jsp">로그인성공테스트용링크</a>
             </div>
             <form action="<%=request.getContextPath() %>/main/mainfunction" method="get">
             <div class="main_skil1">
                 <div class="select_1">
-                    <h2>출발지</h2>
-                    <select name="nation" id="select_nation">
-                        <option id="europe" value="유럽">유럽</option>
-                        <option id="asia" value="아시아">아시아</option>
-                        <option id="amarica" value="아메리카">아메리카</option>
+                    <select name="depart" id="select_nation">
+                        <option value="" selected>출발지</option>
+						<option value="incheon">인천</option>
+						<option value="busan">부산</option>
                     </select>
                 </div>
                 <div class="select_1_1">
-                    <h2>도착지</h2>
-                    <select name="city" id="select_city">
-                        <option id="france" value="france">프랑스</option>
-                        <option id="switzerland" value="swiss">스위스</option>
-                        <option id="uk" value="englind">영국</option>
+                    <select name="arrive" id="select_city">
+                        <option value="" selected>도착지</option>
+							<option value="france">프랑스</option>
+							<option value="swiss">스위스</option>
+							<option value="englind">영국</option>
                     </select>
                 </div>    
                 <div class="select_2">
-                    <h2>기간</h2>
                     <select name="days" id="select_days">
-                        <option id="tendays" value="10">10일</option>
-                        <option id="fifteendays" value="15">15일</option>
+                       <option value="" >며칠?</option>
+							<option value="5" selected>5일</option>
+							<option value="10">10일</option>
+							<option value="15">15일</option>
                     </select>
                 </div>
             </div>

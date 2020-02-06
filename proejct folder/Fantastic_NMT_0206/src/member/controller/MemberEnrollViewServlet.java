@@ -25,10 +25,7 @@ public class MemberEnrollViewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		System.out.println("회원가입뷰단");
 		request.getRequestDispatcher("/WEB-INF/views/member/memberEnroll.jsp").forward(request, response);
-		
 		
 	}
 

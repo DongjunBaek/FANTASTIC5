@@ -249,4 +249,18 @@ alter table nmt_hotel add constraint fk_hotel_img_code foreign key(img_code) ref
 select * from user_constraints where constraint_type='R';
 select * from all_constraints where table_name = 'nmt_hotel';
 
+CREATE TABLE "BOARD_CATEGORY" (
+	"BOARD_CATE"	VARCHAR2(50)		NOT NULL,
+	"BOARD_TITLE"	VARCHAR2(50)		NULL,
+	"BOARD_INFO"	VARCHAR2(200)		NULL
+);
+insert into board_category values('a1' ,'notice','admin_notioce');
+insert into board_category values('b1', 'board', 'review-board');
+insert into board_category values('c1','onetoone','일대일문의');
 
+
+
+create SEQUENCE seq_member_code start with 10000001 MAXVALUE 10009999;
+create SEQUENCE seq_board_no start with 1;
+select * from nmt_member;
+insert into nmt_member values(00000001,'admin','admin','01012341234','admin@naver.com','서울시 강남구',default,100000,to_date('19000909'),'관리자');
