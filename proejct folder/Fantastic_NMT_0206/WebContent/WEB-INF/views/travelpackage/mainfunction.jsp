@@ -71,7 +71,7 @@ $(function(){
 
 $(function(){
 	
-    $("#li-airplane").click(function(){ 
+/*     $("#li-airplane").click(function(){ 
     	$(".airplane").css('display','block');
         $(".air-card").css('display','block');
         $("#hotel").css('display','none');
@@ -88,7 +88,7 @@ $(function(){
         $(".air-card").css('display','none');
         $("#hotel").css('display','none');
         $("#place").css('display','block');
-    });
+    }); */
 })
 
 
@@ -254,7 +254,7 @@ footer {
 				<li id="li-place" class="li-style">관광지/시설</li>
 			</ul>
 			<br />
-
+<div id="main-div-airplane">
 			<div class="airplane">
 				<i class="fas fa-circle"
 					style="font-size: 10px; margin: 10px; color: #ed4848;"></i><span
@@ -370,6 +370,8 @@ footer {
 					</tbody>
 				</table>
 			</div>
+</div>			
+<div id="main-div-hotel">
 			<div class="card-container" id="hotel">
 				<div id="hotel-cards">
 					<div class="card-box">
@@ -428,6 +430,7 @@ footer {
 					</div>
 				</div>
 			</div>
+	</div>
 <style>
 .hotel-name {
 	padding-top: 10px;
@@ -473,17 +476,95 @@ footer {
 
 				</div>
 			</div>
+			
 			<div class="next-button">
-				<button id="next">다음</button>
+				
+				<button class = "btn-loc-to" id="next-to-hotel">다음</button>								
+				<button class = "btn-loc-to" id="next-to-place">다음</button>
+										
+				<button class = "btn-loc-to" id="add-plan">담기</button>
+				<button class = "btn-loc-to" id="before-to-hotel">이전</button>
+				<button class = "btn-loc-to" id="before-to-air">이전</button>
+				
+				
 			</div>
+			
+			<script>
+			$(function(){
+				$("#li-airplane").trigger("click");
+				$("#before-to-air").css("display","none");
+				$("#next-to-place").css("display","none");
+				$("#before-to-hotel").css("display","none");
+				$("#add-plan").css("display","none");
+				
+				$("#li-airplane").click(function(){
+					$("#before-to-air").trigger("click");
+				});
+				$("#li-hotel").click(function(){
+					$("#next-to-hotel").trigger("click");
+				})
+				$("#li-place").click(function(){
+					$("#next-to-place").trigger("click");
+				});
+				
+				$("#next-to-hotel").click(function(){
+					$("#main-div-airplane").css("display","none");
+					$(this).css("display","none");
+					$("#before-to-air").css("display","block");					
+					$("#next-to-place").css("display","block");
+					$("#hotel").css("display","block");
+					$("#place").css("display","none");
+					$("#before-to-hotel").css("display","none");
+					$("#add-plan").css("display","none");
+				});
+				
+				$("#before-to-air").click(function(){
+					$("#main-div-airplane").css("display","block");
+					$("#next-to-hotel").css("display","block");
+					$("#next-to-place").css("display","none");
+					$("#add-plan").css("display","none");
+					$(this).css("display","none");
+					$("#hotel").css("display","none");
+					$("#place").css("display","none");
+					$("#next-to-hotel").css("display","block");
+					$("#before-to-hotel").css("display","none");
+				});
+				
+				$("#next-to-place").click(function(){
+					$("#main-div-airplane").css("display","none");
+					
+					$("#hotel").css("display","none");
+					$(this).css("display","none");
+					$("#place").css("display","block");
+					$("#before-to-air").css("display","none");
+					$("#before-to-hotel").css("display","block");
+					$("#next-to-hotel").css("display","none");
+					$("#add-plan").css("display","block");
+					
+				});
+				
+				$("#before-to-hotel").click(function(){
+					$("#hotel").css("display","block");
+					$(this).css("display","none");
+					$("#place").css("display","none");
+					$("#next-to-place").css("display","block");
+					$("#before-to-air").css("display","block");
+					$("#add-plan").css("display","none");
+					
+				});
+			});
+			
+			</script
+			>
 			<style>
-#next {
+.btn-loc-to {
 	width: 180px;
 	height: 40px;
 	background: #ed4848;
 	border: 2px solid #ed4848;
 	border-radius: 10px;
 	color: white;
+	float:right;
 	font-size: 18px;
 }
 
@@ -491,7 +572,7 @@ footer {
 	position: relative;
 	bottom: 10%;
 	float: right;
-	width: 180px;
+	width: 380px;
 	margin-bottom: 20px;
 }
 </style>
