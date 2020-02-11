@@ -462,9 +462,9 @@ insert into nmt_air values('air-0001', 'INCHEON', 'ENGLAND', 'KE907', 442300, '�
 insert into nmt_air values('air-0002', 'INCHEON', 'ENGLAND', 'OZ716', 451500, '아시아나항공', to_date('202002191045','yyyyMMddHH24MI'), to_date('202002191415','yyyymmddhh24mi'));
 insert into nmt_air values('air-0003', 'INCHEON', 'ENGLAND', 'BA18', 553600, '영국항공', to_date('202002191100','yyyyMMddHH24MI'), to_date('202002191430','yyyymmddhh24mi'));
 
-insert into nmt_air values('air-0004', 'ENGLAND', 'INCHEON', 'KE908', 342300, '대한항공', to_date('202002231800','yyyyMMddHH24MI'), to_date('202002241430','yyyymmddhh24mi'));
-insert into nmt_air values('air-0005', 'ENGLAND', 'INCHEON', 'OZ522', 551500, '아시아나항공', to_date('202002232010','yyyyMMddHH24MI'), to_date('202002241605','yyyymmddhh24mi'));
-insert into nmt_air values('air-0006', 'ENGLAND', 'INCHEON', 'BA18', 353600, '영국항공', to_date('202002231245','yyyyMMddHH24MI'), to_date('202002242045','yyyymmddhh24mi'));
+insert into nmt_air values('air-0004', 'ENGLAND', 'INCHEON', 'KE908', 342300, '대한항공', to_date('202002241800','yyyyMMddHH24MI'), to_date('202002251430','yyyymmddhh24mi'));
+insert into nmt_air values('air-0005', 'ENGLAND', 'INCHEON', 'OZ522', 551500, '아시아나항공', to_date('202002242010','yyyyMMddHH24MI'), to_date('202002251605','yyyymmddhh24mi'));
+insert into nmt_air values('air-0006', 'ENGLAND', 'INCHEON', 'BA18', 353600, '영국항공', to_date('202002241245','yyyyMMddHH24MI'), to_date('202002252045','yyyymmddhh24mi'));
 
 
 --INCHEON SWISS 
@@ -472,18 +472,18 @@ insert into nmt_air values('air-0007', 'INCHEON', 'SWISS', 'KE917', 325000, '대
 insert into nmt_air values('air-0008', 'INCHEON', 'SWISS', 'OZ316', 441500, '아시아나항공', to_date('202002191005','yyyyMMddHH24MI'), to_date('202002191515','yyyymmddhh24mi'));
 insert into nmt_air values('air-0009', 'INCHEON', 'SWISS', 'LO98', 486000, '폴란드항공', to_date('202002191100','yyyyMMddHH24MI'), to_date('202002191640','yyyymmddhh24mi'));
 
-insert into nmt_air values('air-0010', 'SWISS', 'INCHEON', 'KE916', 463000, '대한항공', to_date('202002231100','yyyyMMddHH24MI'), to_date('202002231350','yyyymmddhh24mi'));
-insert into nmt_air values('air-0011', 'SWISS', 'INCHEON', 'OZ654', 381500, '아시아나항공', to_date('202002230905','yyyyMMddHH24MI'), to_date('202002231415','yyyymmddhh24mi'));
-insert into nmt_air values('air-0012', 'SWISS', 'INCHEON', 'LO87', 446000, '폴란드항공', to_date('202002231700','yyyyMMddHH24MI'), to_date('202002242340','yyyymmddhh24mi'));
+insert into nmt_air values('air-0010', 'SWISS', 'INCHEON', 'KE916', 463000, '대한항공', to_date('202002241100','yyyyMMddHH24MI'), to_date('202002251350','yyyymmddhh24mi'));
+insert into nmt_air values('air-0011', 'SWISS', 'INCHEON', 'OZ654', 381500, '아시아나항공', to_date('202002240905','yyyyMMddHH24MI'), to_date('202002251415','yyyymmddhh24mi'));
+insert into nmt_air values('air-0012', 'SWISS', 'INCHEON', 'LO87', 446000, '폴란드항공', to_date('202002241700','yyyyMMddHH24MI'), to_date('202002252340','yyyymmddhh24mi'));
 
 --INCHEON-FRANCE
 insert into nmt_air values('air-0013', 'INCHEON', 'FRANCE', 'KE591', 525000, '대한항공', to_date('202002190955','yyyyMMddHH24MI'), to_date('202002191420','yyyymmddhh24mi'));
 insert into nmt_air values('air-0014', 'INCHEON', 'FRANCE', 'OZ501', 390800, '아시아나항공', to_date('202002191230','yyyyMMddHH24MI'), to_date('202002191700','yyyymmddhh24mi'));
 insert into nmt_air values('air-0015', 'INCHEON', 'FRANCE', 'AF267', 400500, '에어프랑스', to_date('202002191000','yyyyMMddHH24MI'), to_date('202002191425','yyyymmddhh24mi'));
 
-insert into nmt_air values('air-0016', 'FRANCE', 'INCHEON', 'KE917', 463000, '대한항공', to_date('202002231100','yyyyMMddHH24MI'), to_date('202002231350','yyyymmddhh24mi'));
-insert into nmt_air values('air-0017', 'FRANCE', 'INCHEON', 'OZ502', 381500, '아시아나항공', to_date('202002231905','yyyyMMddHH24MI'), to_date('202002231355','yyyymmddhh24mi'));
-insert into nmt_air values('air-0018', 'FRANCE', 'INCHEON', 'AF298', 446000, '에어프랑스', to_date('202002231300','yyyyMMddHH24MI'), to_date('202002242010','yyyymmddhh24mi'));
+insert into nmt_air values('air-0016', 'FRANCE', 'INCHEON', 'KE917', 463000, '대한항공', to_date('202002241100','yyyyMMddHH24MI'), to_date('202002241350','yyyymmddhh24mi'));
+insert into nmt_air values('air-0017', 'FRANCE', 'INCHEON', 'OZ502', 381500, '아시아나항공', to_date('202002241905','yyyyMMddHH24MI'), to_date('202002241355','yyyymmddhh24mi'));
+insert into nmt_air values('air-0018', 'FRANCE', 'INCHEON', 'AF298', 446000, '에어프랑스', to_date('202002241300','yyyyMMddHH24MI'), to_date('202002252010','yyyymmddhh24mi'));
 
 -----------------------------------10
 -- INCHEON - ENGLAND
@@ -546,5 +546,19 @@ insert into nmt_air values('air-0035', 'FRANCE', 'INCHEON', 'OZ502', 381500, '�
 insert into nmt_air values('air-0036', 'FRANCE', 'INCHEON', 'AF298', 446000, '에어프랑스', to_date('202002281300','yyyyMMddHH24MI'), to_date('202003062010','yyyymmddhh24mi'));
 
 -----
-select * from nmt_air order by air_code;
+select * from nmt_air where to_char(air_depart) = to_date('2020-02-19');
+select * from nmt_air;
+
+--select to_char(air_depart) from nmt_air where to_char(air_depart) = '20/02/19';
+
+
+
+
+
+
+
+
+
+
+
 
