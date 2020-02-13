@@ -41,7 +41,7 @@ public class MemberLoginEndServlet extends HttpServlet {
 		//b. 로그인 실패: 비밀번호 오류
 		//c. 로그인실패: 존재하지 않는 아이디
 		
-		Member m = new MemberService().selectOne(memberId);
+		Member m = new MemberService().selectOneById(memberId);
 //		System.out.println("member@controller="+m);
 		
 		String msg = "";

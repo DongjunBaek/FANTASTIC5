@@ -11,6 +11,10 @@ import product.travel.model.vo.Hotel;
  * @author Minhee
 	만든날짜 : 200211
 	목적 : 호텔관련서비스단
+	
+	보라
+	메인기능: 사용자가 선택한호텔 insert
+	
  *
  */
 public class HotelService {
@@ -21,13 +25,25 @@ public class HotelService {
 		close(conn);
 		return hList;
 	}
-	
-	//0212 민희 - 호텔코드에 해당하는 호텔 찾기
-		public Hotel selectOne(String htlCode) {
-			Connection conn = getConnection();
-			Hotel h = new HotelDAO().selectOne(conn, htlCode);
-			close(conn);
-			return h;
-		}
+
+	public int insertHotel(String packageCode, String hotelCode, String hotelArr, int a) {
+		Connection conn = getConnection();
+		int hotelResult = new HotelDAO().insertHotel(conn,packageCode, hotelCode,hotelArr, a);
+		if(hotelResult>0)commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return hotelResult;
+	}
+
+	public List<Hotel> selectPackageHotelList(String memberCode) {
+		Connection conn = getConnection();
+		List<Hotel> list = new HotelDAO().selectPackageHotelList(conn, memberCode);
+		close(conn);
+		return list;
+	}
+
+
 
 }

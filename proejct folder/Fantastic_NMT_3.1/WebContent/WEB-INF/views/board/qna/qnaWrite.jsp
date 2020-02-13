@@ -1,9 +1,9 @@
 <%@page import="board.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!-- 여주
+    <!-- 보라
 	만든날짜 : 200206
-	목적 : 게시판 글쓰기 jsp -->
+	 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +14,6 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/226b55f414.js" crossorigin="anonymous"></script>
-<script>
-function noticeValidate(){
-	 location.href= "<%=request.getContextPath()%>/board/noticeView";
-}
-</script>
 <style>
 .bg_img{
     height: 700px;
@@ -31,7 +26,6 @@ function noticeValidate(){
 </head>
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <%
-	Notice n = (Notice)request.getAttribute("notice");
 %>
 <body>
     <header>

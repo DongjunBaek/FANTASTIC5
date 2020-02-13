@@ -16,6 +16,7 @@ public class Hotel {
 	private String hotelAddr;     //주소
 	private double hotelScore;		  //호텔평점
 	private String hotelImg;
+	private int hotelDays;
 	
 	public Hotel() {
 		super();
@@ -24,7 +25,7 @@ public class Hotel {
 	
 
 	public Hotel(String hotelCode, String nationCode, String distanceLevel, String hotelName,
-			int hotelPrice, String hotelAddr, double hotelScore, String hotelImg) {
+			int hotelPrice, String hotelAddr, double hotelScore, String hotelImg,int hotelDays) {
 		super();
 		this.hotelCode = hotelCode;
 		this.nationCode = nationCode;
@@ -34,6 +35,7 @@ public class Hotel {
 		this.hotelAddr = hotelAddr;
 		this.hotelScore = hotelScore;
 		this.hotelImg = hotelImg;
+		this.hotelDays = hotelDays;
 	}
 
 
@@ -107,14 +109,18 @@ public class Hotel {
 		this.hotelImg = hotelImg;
 	}
 
-
-
+	public void setHotelDays(int hotelDays) {
+		this.hotelDays = hotelDays;
+	}
+	public int getHotelDays() {
+		return hotelDays;
+	}
 	@Override
 	public String toString() {
 		return "Hotel [hotelCode=" + hotelCode + ", nationCode=" + nationCode + ", distanceLevel=" + distanceLevel
 				+ ", hotelName=" + hotelName + ", hoelPrice=" + hotelPrice + ", hotelAddr="
 				+ hotelAddr + ", hotelScore=" + hotelScore + ", hotelImg="
-				+ hotelImg + "]";
+				+ hotelImg + "]"+hotelDays;
 	}
 
 

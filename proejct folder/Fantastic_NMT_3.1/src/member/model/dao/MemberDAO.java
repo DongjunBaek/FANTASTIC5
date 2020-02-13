@@ -39,7 +39,7 @@ public class MemberDAO {
 		}
 	}
 	
-	public Member selectOne(Connection conn, String memberId) {
+	public Member selectOne(Connection conn, String memberCode) {
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -47,11 +47,11 @@ public class MemberDAO {
 		System.out.println("query="+query);
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberId);
+			pstmt.setString(1, memberCode);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				m = new Member();
-				m.setMcode(rset.getInt("member_code"));
+				m.setMcode(rset.getString("member_code"));
 				m.setMemberId(rset.getString("member_id"));
 				m.setPassword(rset.getString("member_password"));
 				m.setPhone(rset.getString("member_phone"));
@@ -78,15 +78,15 @@ public class MemberDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getPassword());
-			pstmt.setString(3, m.getPhone());
-			pstmt.setString(4, m.getEmail());
-			pstmt.setString(5, m.getAddress());
-			pstmt.setDate(6, m.getBirthDay());
-			pstmt.setString(7, m.getMemberName());
-			
-			result = pstmt.executeUpdate();
+	         pstmt.setString(1, m.getMemberId());
+	         pstmt.setString(2, m.getPassword());
+	         pstmt.setString(3, m.getMemberName());
+	         pstmt.setString(4, m.getPhone());
+	         pstmt.setString(5, m.getEmail());
+	         pstmt.setString(6, m.getAddress());
+	         pstmt.setDate(7, m.getBirthDay());
+	         
+	         result = pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -140,6 +140,39 @@ public class MemberDAO {
 			}
 			return result;
 		}
+
+		public Member selectOneById(Connection conn, String memberId) {
+			Member m = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String query = "select * from nmt_member where member_id=?";
+			System.out.println("query="+query);
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, memberId);
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					m = new Member();
+					m.setMcode(rset.getString("member_code"));
+					m.setMemberId(rset.getString("member_id"));
+					m.setPassword(rset.getString("member_password"));
+					m.setPhone(rset.getString("member_phone"));
+					m.setEmail(rset.getString("member_email"));
+					m.setAddress(rset.getString("member_address"));
+					m.setEnrollDate(rset.getDate("member_regdate"));
+					m.setMile(rset.getDouble("member_mile"));
+					m.setBirthDay(rset.getDate("member_birth"));
+					m.setMemberName(rset.getString("member_name"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rset);
+			}
+			return m;
+		}
+
 
 	
 	

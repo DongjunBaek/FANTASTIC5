@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="product.travel.model.vo.Place"%>
 <%@page import="product.travel.model.vo.Hotel"%>
 <%@page import="product.travel.model.vo.Air"%>
@@ -56,7 +57,7 @@ $(document).ready(function () {
    $("#hotel").css('display','none');
    $("#place").css('display','none');
    
-   console.log("ㅇ야야야야");
+   
    $("select[name=depart]").val("<%=depart==null?"":depart%>").prop("selected",true);
    $("select[name=arrive]").val("<%=arrive==null?"":arrive%>").prop("selected",true);
    $("select[name=days]").val("<%=days==null?"":days%>").prop("selected",true);
@@ -103,28 +104,30 @@ $(function(){
 
 
 $(function () {
-    
-	
+    /* 02 12 plus minus button fix */
+		
     $('.btn-plus').click(function () {
-		let day1 = Number($("#hotel-days1").text());
-		let day2 = Number($("#hotel-days2").text());
-		let day3 = Number($("#hotel-days3").text());
-    	console.log("day1",day1);
-    	console.log("day2",day2);
-    	console.log("day3",day3);
-    	console.log($(this));
+
+    	/* console.log($(this).parent().children("input").eq(0).val()); */
+    	console.log($(".card-box-1-info").parent().children("div").eq(1).children("input").eq(0).val());
+    	let day1 = Number($(".card-box-1-info").parent().children("div").eq(1).children("input").eq(0).val());
+    	let day2 = Number($(".card-box-1-info").parent().children("div").eq(3).children("input").eq(0).val());
+    	let day3 = Number($(".card-box-1-info").parent().children("div").eq(5).children("input").eq(0).val());
+    	
+    	console.log(day1,day2,day3);
     	
 		let startdate = $("#startDate").val().substr(8);
 		let enddate = $("#endDate").val().substr(8);
     	let totalday = enddate-startdate;
     	
-    	
+    	console.log('사용자가 선택한 최대 숙박 일 수' ,totalday);
     	
         if( (day1+day2+day3) < totalday){
         
-        let temp = Number($(this).prev().text())+1;
-        console.log("temp",temp);
-        $(this).prev().html(temp);
+       		let temp = Number($(this).prev().val())+1;
+       	 
+        	console.log("temp",temp);
+        	$(this).prev().val(temp);
         
         }else if(totalday ==0){
         	alert("출발일/도착일을 선택하세요");
@@ -133,19 +136,21 @@ $(function () {
         }else{
             alert(totalday+"일 이상 입력할 수 없습니다.");
         }
-        console.log( day1, day2, day3);
+        
     });
     
     $('.btn-minus').click(function () {
     	let day1 = Number($("#hotel-days1").text());
 		let day2 = Number($("#hotel-days2").text());
 		let day3 = Number($("#hotel-days3").text());				
-		$thisVal = $(this).parent().children().eq(4).text();
+		$thisVal = $(this).parent().children().eq(4).val();
 		if($thisVal != 0){
-			$(this).parent().children().eq(4).text($thisVal-1);
+			$(this).parent().children().eq(4).val($thisVal-1);
 		}
        
     });
+    /* 02 12 plus minus button fix end */
+    
     
     //2020.02.08 작업 <왼쪽 사이드메뉴 : 형철>
     $("#startDate").datepicker({
@@ -216,7 +221,7 @@ $(function () {
                    console.log("바람   : "+ data.wind.speed );
                    console.log("나라   : "+ data.sys.country );
                    console.log("도시이름  : "+ data.name );
-                   console.log("구름  : "+ (data.clouds.all) +"%" ); */ 
+                   console.log("구름  : "+ (data.clouds.all) +"%" ); */ S
                    
                    let img ="http://openweathermap.org/img/w/"+ data.weather[0].icon +".png";
                    $(".weather-image img").attr("src",img);
@@ -241,19 +246,27 @@ $(function () {
     
 });
 
-/* 0208동준이작업 */
+/* 02 12 동준이작업 */
 $(function(){
+	
 	$("i.fa-heart").click(function(){
+		/* 02 12 동준작업 */
+		console.log($(this).parent().children("input").prop("checked"));
 		
-		if(!$(this).parent().parent().children("input:checkbox").prop("checked")){				
+		$(this).parent().children("input").prop("checked", !($(this).parent().children("input").prop("checked")))
+		
+		if(($(this).parent().children("input").prop("checked"))){				
 			$(this).css("color","#eb4848");
 		}
 		else{
-				$(this).css("color","#ebebeb"); 
+			$(this).css("color","#ebebeb"); 
 		}
+		
 	});	
+		/* 02 12 동준작업 */
 	
-	/*0210 민희 - 담기 버튼 누르면 서블릿으로 선택한 name값들 보내기*/
+	/*0210 민희 - 담기 버튼 누르면 서블릿으로 선택한 name값들 보내기
+	 0212 보라 서블릿 완성					*/
 	
 	 $("#add-plan").click(function(){
 		$("#addToPackageForm").submit();
@@ -382,6 +395,7 @@ position: relative;
 }
 
 i.fa-heart{
+	position :absolute; 
 	font-size: 30px;		
 	color: #ebebeb;			
 }
@@ -484,6 +498,7 @@ i.fa-heart{
 			</ul>
 			<br />
 		<form id="addToPackageForm"  action="<%=request.getContextPath() %>/main/addPackageServlet" method="post">
+		<input type="hidden" name="memberCode" value="<%=memberLoggedIn.getMcode()%>" />
 		<div id="main-div-airplane">
 			<div class="airplane">
 				<i class="fas fa-circle"
@@ -508,24 +523,41 @@ i.fa-heart{
 					</thead>
 					<tbody>
 					<%if(startList!=null){ 
-						for(Air a : startList){ %>
+						for(Air a : startList){
+							String nation = "";
+							if(a.getNationArrival().equals("swiss")){
+								nation = "스위스";	
+							}else if(a.getNationArrival().equals("england")){
+								nation = "영국";
+							}else{
+								nation="프랑스";	
+							}
+							DecimalFormat priceFormat = new DecimalFormat("###,###");
+							
+							String airPrice = priceFormat.format(a.getAirPrice());
+						%>
 						<tr>
 							<td><img
 								src="<%=request.getContextPath()%>/images/mainfunction/<%=a.getAirImgName()%>"
 								alt=""></td>
 							<td><input type="text" value="<%=a.getAirName() %>" name="airName" readonly/></td>
-							<td><input type="text" value="<%=a.getStartTime() %>" name="airTime_start" readonly/></td>
-							<td><input type="text" value="<%=a.getArriveTime() %>" name="airTime_end" readonly/></td>
-							<td><input type="text" value="<%=a.getNationDepart() %>" name="airDepart" readonly/></td>
-							<td><input type="text" value="<%=a.getNationArrival() %>" name="airArrival" readonly/></td>
-							<td><input type="text" value="<%=a.getAirPrice() %>" name="airPrice" readonly/></td>
-							<td><input type="radio" value="KE159" name="plane-check"></td>
+							<td><input type="text" value="<%=a.getStartTime().substring(a.getStartTime().length()-5,a.getStartTime().length())%>" name="airTime_start" readonly/></td>
+							<td><input type="text" value="<%=a.getArriveTime().substring(a.getArriveTime().length()-5, a.getArriveTime().length()) %>" name="airTime_end" readonly/></td>
+							<td><input type="text" value="<%=a.getNationDepart().equals("busan")?"부산":"인천" %>" name="airDepart" readonly/></td>
+							<td><input type="text" value="<%=nation %>" name="airArrival" readonly/></td>
+							<td><input type="text" value="<%=airPrice %>" name="airPrice" readonly/></td>
+							<td><input type="radio" value="<%=a.getAirName() %>" name="plane-check">
+								<input type="hidden" name="airCode" value="<%=a.getAirCode()%>"/></td>
 						</tr>
 					<%  } 
 					}	%>
 					</tbody>
 				</table>
-
+<style>
+	.air-card input{
+	font-size:15px;
+	padding-left:10px;}
+</style>
 			</div>
 			<div class="airplane">
 				<i class="fas fa-circle"
@@ -550,18 +582,30 @@ i.fa-heart{
 					</thead>
 					<tbody>
 					<%if(endList!=null){
-						for(Air a:endList){ %>
+						for(Air a:endList){ 
+							String nation = "";
+							if(a.getNationDepart().equals("swiss")){
+								nation = "스위스";	
+							}else if(a.getNationDepart().equals("england")){
+								nation = "영국";
+							}else{
+								nation="프랑스";	
+							}
+							DecimalFormat priceFormat = new DecimalFormat("###,###");
+							
+							String airPrice = priceFormat.format(a.getAirPrice())  ;
+						%>
 						<tr>
 							<td><img
 								src="<%=request.getContextPath()%>/images/mainfunction/<%=a.getAirImgName() %>"
 								alt=""></td>
 							<td><input type="text" value="<%=a.getAirName() %>" name="airName_" readonly/></td>
-							<td><input type="text" value="<%=a.getStartTime() %>" name="airTime_start_" readonly/></td>
-							<td><input type="text" value="<%=a.getArriveTime() %>" name="airTime_end_" readonly/></td>
-							<td><input type="text" value="<%=a.getNationDepart() %>" name="airDepart_" readonly/></td>
-							<td><input type="text" value="<%=a.getNationArrival() %>" name="airArrival_" readonly/></td>
-							<td><input type="text" value="<%=a.getAirPrice() %>" name="airPrice_" readonly/></td>
-							<td><input type="radio" value="KE159" name="plane-check_" ></td>
+							<td><input type="text" value="<%=a.getStartTime().substring(a.getStartTime().length()-5,a.getStartTime().length()) %>" name="airTime_start_" readonly/></td>
+							<td><input type="text" value="<%=a.getArriveTime().substring(a.getArriveTime().length()-5, a.getArriveTime().length()) %>" name="airTime_end_" readonly/></td>
+							<td><input type="text" value="<%=nation %>" name="airDepart_" readonly/></td>
+							<td><input type="text" value="<%=a.getNationArrival().equals("busan")?"부산":"인천"%>" name="airArrival_" readonly/></td>
+							<td><input type="text" value="<%=airPrice %>" name="airPrice_" readonly/></td>
+							<td><input type="radio" value="<%=a.getAirName() %>" name="plane-check_" ><input type="hidden" name="airCode_" value="<%=a.getAirCode()%>"/></td>
 						</tr>
 					<%  }
 					} %>
@@ -585,12 +629,12 @@ i.fa-heart{
 						<div class="card-box-1-info">
 							<!-- <span>므제브호텔</span> -->
 							<p class="hotel-name"><%=h.getHotelName() %></p>
+							
 							<span class="price"><%=h.getHotelPrice() %> <i class="fas fa-won-sign"></i></span><br>
-
 							<button class="btn-minus" type="button">-</button>
-							<span name="hotel-days" id="hotel-days1">0</span>
+							<input type="text" value="0" name="hoteldays" />
 							<button class="btn-plus" type="button">+</button>
-
+							<input type="hidden" name="hotelCode" value="<%=h.getHotelCode()%>" />
 						</div>
 					</div>
 				<%  }
@@ -607,11 +651,13 @@ i.fa-heart{
 			<%if(placeList!=null){
 				for(Place p:placeList){ %>
 				<div class="card-box">
-					<input type="checkbox" value="관광지코드1" class="card-box-heart" id="card-box-1-heart" name="packplace">
-					<label for="card-box-1-heart"><i class="fas fa-heart"></i></label>
+				<!-- 02 12 수정 시작 -->
+					<input type="checkbox" value="<%=p.getPlaceCode()%>" class="card-box-heart" name="packplace">
+					<i class="fas fa-heart"></i>						
 					<img
 						src="<%=request.getContextPath()%>/images/place/<%=p.getPlaceImg() %>"
-						alt="호텔사진1" width="300px"> <br>
+						alt="관광지사진1" width="300px"> <br>
+				<!-- 02 12 수정 시작 -->
 					<div class="card-box-1-info">
 						<p class="price"><%=p.getPlaceName() %></p><br />
 						<!-- <span class="price">190,494 <i class="fas fa-won-sign"></i></span><br> -->
@@ -736,6 +782,10 @@ i.fa-heart{
 	color: white;
 	float:right;
 	font-size: 18px;
+	/* 02 12 btn cursor  */
+	cursor: pointer;
+	/* 02 12 btn cursor  */
+	
 }
 
 .next-button {

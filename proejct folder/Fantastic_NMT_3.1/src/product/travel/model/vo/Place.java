@@ -9,6 +9,7 @@ import java.util.Arrays;
  * 생성목적 : 관광지 객체클래스
  */
 public class Place {
+	
 	private String placeCode;	  //상품코드
 	private String nationCode;	  //국가코드
 	private String distanceLevel; //거리정보코드

@@ -51,7 +51,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		Date d = Date.valueOf(birthday);
 		System.out.println("birthday@servlet="+d);
 		
-		Member m = new Member(0, memberId, password, phone, email, address, null, 0, d, memberName);
+		Member m = new Member(null , memberId, password, phone, email, address, null, 0, d, memberName);
 		
 		int result = new MemberService().memberInsert(m);
 		String msg = "";

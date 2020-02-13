@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 
-@WebServlet("/member/memberEnrollView")
+@WebServlet(urlPatterns = {"/member/memberEnrollView","/member/memberEnroll"})
 public class MemberEnrollViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

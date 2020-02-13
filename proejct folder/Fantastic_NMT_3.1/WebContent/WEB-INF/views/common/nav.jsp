@@ -12,9 +12,9 @@
                 onclick="location.href='<%=request.getContextPath()%>/'">
                 <div class="left_select">
                     <ul>
-                        <li id="searchli">Search</li>
-                        <li id="noticeli" onclick="location.href='<%=request.getContextPath()%>/board/noticeList'">Notice</li>
-                        <li id="reviewli" onclick="location.href='<%=request.getContextPath()%>/board/reviewList'">Review</li>
+                        <li id="searchli">SEARCH</li>
+                        <li id="noticeli" onclick="location.href='<%=request.getContextPath()%>/board/noticeList'">NOTICE</li>
+                        <li id="reviewli" onclick="location.href='<%=request.getContextPath()%>/board/reviewList'">REVIEW</li>
                         <li id="qnali">QnA</li>
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="rigth_select">
                 	<%-- <p><%=memberLoggedIn.getMemberName() %>님</p> --%>
                     <input type="button" id="btn_login" value="LOGOUT" onclick="location.href='<%=request.getContextPath()%>/member/memberLogoutView'">
-                    <input type="button" id="btn_join" value="MYPAGE" onclick="location.href='<%=request.getContextPath()%>/member/memberPageView?memberId=<%=memberLoggedIn.getMemberId()%>'">
+                    <input type="button" id="btn_join" value="MYPAGE" onclick="location.href='<%=request.getContextPath()%>/member/memberPageView?memberCode=<%=memberLoggedIn.getMcode()%>'">
                 </div>
                 <% } %>
             </div>

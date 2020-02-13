@@ -23,8 +23,8 @@
 }
 .img_big{
 	background-image : url(<%=request.getContextPath() %>/images/main/main_hotel1.jpg); 
-    /* background-size: cover; */
-    /* background-position: top center; */
+	 background-size: cover;
+    background-position: top center;
 }
 .mini_img img{width:180px; height:125px;
 }
@@ -55,7 +55,7 @@ $(document).ready(function () {
 			   //console.log($curHtl.hotelName);
 			  
 			   /* $(".cheapest-htlImg1".css({"background":"url(images/hotel/"+$curHtl.hotelCode+".1.jpg)"})); */
-			   $(".img_big").css({"background-image":"url(/images/hotel/"+$curHtl.hotelCode+".1.jpg"}); 
+			   $(".img_big").css({"background-image":"url(<%=request.getContextPath() %>/images/hotel/"+$curHtl.hotelCode+".1.jpg"}); 
 			   $(".cheapest-htlImg1").attr("src", "images/hotel/"+$curHtl.hotelCode+".1.jpg");
 			   $(".cheapest-htlImg2").attr("src", "images/hotel/"+$curHtl.hotelCode+".2.jpg");
 			   $(".cheapest-htlImg3").attr("src", "images/hotel/"+$curHtl.hotelCode+".3.jpg");

@@ -94,7 +94,7 @@ function noticeValidate(){
                 </tr>
             </table>
         </form>
-                <%if(memberLoggedIn.getMcode()==oneToOne.getMemberCode() || memberLoggedIn.getMemberId()=="admin"){ %>
+                <%if( memberLoggedIn.getMcode().equals(oneToOne.getMemberCode()) || memberLoggedIn.getMemberId()=="admin"){ %>
                	<div class="btn_wrap">
                		 <input type="submit" value="수정하기" id="btn_update_submit" onclick="location.href='<%=request.getContextPath()%>/qna/updateQnA?boardNo=<%=oneToOne.getBoardNo()%>'">
                 	<input type="submit" value="삭제하기" id="btn_delete_submit" onclick="deleteQnA();">

@@ -14,9 +14,9 @@ import member.model.vo.Member;
  */
 public class MemberService {
 
-	public Member selectOne(String memberId) {
+	public Member selectOne(String memberCode) {
 		Connection conn = getConnection();
-		Member m = new MemberDAO().selectOne(conn, memberId);
+		Member m = new MemberDAO().selectOne(conn, memberCode);
 		close(conn);
 		return m;
 	}
@@ -47,6 +47,14 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	
+	public Member selectOneById(String memberId) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().selectOneById(conn, memberId);
+		close(conn);
+		return m;
+	}
+	
 	
 	
 	

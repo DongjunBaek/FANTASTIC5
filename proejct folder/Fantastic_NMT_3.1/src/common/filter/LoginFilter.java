@@ -19,7 +19,7 @@ import member.model.vo.Member;
  * 생성목적: 
  */
 @WebFilter(servletNames = {"MemberPageViewServlet", "MemberUpdateViewServlet"},
-		   urlPatterns = {"/qna/qnaListView"})
+		   urlPatterns = {"/qna/qnaListView","/main/mainfunction"})
 public class LoginFilter implements Filter {
 
     /**

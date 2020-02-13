@@ -1,3 +1,8 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="product.travel.model.vo.Place"%>
+<%@page import="java.util.List"%>
+<%@page import="product.travel.model.vo.Hotel"%>
+<%@page import="product.travel.model.vo.Air"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -62,12 +67,10 @@ $(function(){
 <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 <%
 	Member m = (Member)request.getAttribute("member");
-	//System.out.println(m);
-	
-	//패키지 리스트 작성 시 참고
-	//String[] hobby = member.getHobby().split(",");
-	//List<String> hobbyList = null;
-	//if(hobby != null) hobbyList = Arrays.asList(hobby);
+	Air airDepart = (Air)request.getAttribute("airDepart");
+	Air airArrive = (Air)request.getAttribute("airArrive");
+	List<Hotel> hotelList = (List<Hotel>)request.getAttribute("hotelList");
+	List<Place> placeList = (List<Place>)request.getAttribute("placeList");
 %>
 <script>
 
@@ -160,8 +163,8 @@ function deleteMember(){
                 <tr>
                 	<th><p class="red-text">항공권</p></th>
                     <th>번호</th>
-                    <th>코드</th>
-                    <th>시간</th>
+                    <th>편명</th>
+                    <th>날짜</th>
                     <th>in</th>
                     <th>out</th>
                     <th>가격</th>
@@ -177,11 +180,31 @@ function deleteMember(){
 						</div>
                 	</td>
                     <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
+                    <%String depart = ""; int packagePrice = 0;
+                    if(airDepart.getNationDepart().equals("incheon")){
+                    	depart = "대한민국/인천";
+                    }else{
+                    	depart = "대한민국/부산";
+                    }
+                   packagePrice += airDepart.getAirPrice();
+                   String arrive ="";
+                   if(airDepart.getNationArrival().equals("swiss")){
+                	   arrive = "스위스/취리히";   
+                   }else if(airDepart.getNationArrival().equals("england")){
+                	   arrive = "영국/런던";
+                   }else{
+                	   arrive = "프랑스/파리";
+                   }
+                   
+                   DecimalFormat priceFormat = new DecimalFormat("###,###");
+					
+					String airPrice = priceFormat.format(airDepart.getAirPrice());
+                    	%>
+                    <td><%=airDepart.getAirName()%></td>
+                    <td><%=airDepart.getAirDepart() %></td>
+                    <td><%=depart %></td>
+                    <td><%=arrive %></td>
+                    <td><%=airPrice %> 원</td>
                 </tr>
             
                 <tr>
@@ -193,23 +216,57 @@ function deleteMember(){
 							</label>
 						</div>
                 	</td>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
+                    <td>2</td>
+                    <%
+                  	String depart_ = "";
+                    String arrive_ = "";
+                    if(airArrive.getNationDepart().equals("swiss")){
+                    	depart_ = "스위스/취리히";
+                    }else if(airArrive.getNationDepart().equals("england")){
+                    	depart_ = "영국/런던";
+                    }else{
+                    	depart_ = "프랑스/파리";
+                    }
+                    packagePrice += airArrive.getAirPrice();
+                    if(airArrive.getNationArrival().equals("busan")){
+                    	arrive_= "부산";
+                    }else{
+                    	arrive_="인천";
+                    }
+                    String airPrice_ = priceFormat.format(airArrive.getAirPrice());
+                    	%>
+                    <td><%=airArrive.getAirName()%></td>
+                    <td><%=airArrive.getAirDepart() %></td>
+                    <td><%=depart_ %></td>
+                    <td><%=arrive_ %></td>
+                    <td><%=airPrice_ %> 원</td>
                 </tr>
             
                 <tr>
                 	<th><p class="red-text">호텔/숙박</p></th>
                     <th>번호</th>
                     <th>코드</th>
-                    <th>인원</th>
-                    <th>기간</th>
+                    <th>숙박일수</th>
                     <th>위치</th>
                     <th>가격</th>
+                    <th>총 가격</th>
                 </tr>
+                	<%
+                	String location = "";
+                	
+                	for(int i=0;i<3;i++){
+                		if(hotelList.get(i).getNationCode().equals("swiss")){
+                			location = "스위스/취리히";
+                		}else if(hotelList.get(i).getNationCode().equals("england")){
+                			location = "영국/런던";
+                		}else{
+                			location = "프랑스/파리";
+                		}
+                		
+           				packagePrice += (hotelList.get(i).getHotelPrice()*hotelList.get(i).getHotelDays());
+           				String hotelPrice = priceFormat.format(hotelList.get(i).getHotelPrice());
+           				String totalPrice = priceFormat.format(hotelList.get(i).getHotelPrice()*hotelList.get(i).getHotelDays());
+           				if(hotelList.get(i).getHotelDays()!=0){ %>
                 <tr>
                 	<td>
                 		<div class="chkbx-center">
@@ -219,31 +276,18 @@ function deleteMember(){
 							</label>
 						</div>
                 	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
+                    <td><%=i %></td>
+                    <td><%=hotelList.get(i).getHotelCode().toUpperCase() %></td>
+                    <td><%=hotelList.get(i).getHotelDays() %></td>
+                    <td><%=location %></td>
+                    <td><%=hotelPrice %> 원</td>
+                    <td><%=totalPrice %>원</td>
                 </tr>
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
+                    <%} 
+                    }%>
             </table>
              <div class="package_list">
+				<%for(Place p:placeList){ %>
                 <section class="pack">
                     <div class="">
 		               	 	<label class="container">
@@ -251,71 +295,23 @@ function deleteMember(){
 							  <span class="checkmark chkbx-pic"></span>
 							</label>
 					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_04.png" width="232px" height="180px">
+                    <img src="<%=request.getContextPath()%>/images/place/<%=p.getPlaceImg()%>" width="232px" height="180px">
                     <div class="each_package_content">
-                        <h3>22000\</h3>
+                        <h3><%=p.getPlacePrice() %></h3>
                     </div>
-                    <p>여행지</p>
+                    <p><%=p.getPlaceName() %></p>
                     </section>
-                <section class="pack">
-                 	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_06.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>56000\</h3>
-                    </div>
-                    <p>여행지</p>
-                    </section>
-                <section class="pack">
-                 	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>12000\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	 <div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>7200\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	 <div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>18200\</h3>
-                    </div>
-                    <p>여행지</p>
-                </section>
+                    <%} %>
+
                 </div>
               </div>
+              <% %>
               <div class="mypage-wrap">
+              <%int discount = 3000000-packagePrice;%>
                 <div class="mypage-select-result float-left" id="mypage-result-box">            
 	                <div><span class="center">총합</span></div>
-	                <div><span class="center">예상 금액 123,456원 절약</span></div>
-	                <div><span class="center"><p class="mypage-totalmoney">2,345,567원</p></span></div>            
+	                <div><span class="center">예상 금액 <%=priceFormat.format(discount) %>절약!</span></div>
+	                <div><span class="center"><p class="mypage-totalmoney"><%=priceFormat.format(packagePrice) %></p></span></div>            
        			 </div>
 	       		<button class="btn-big float-left">구매하기</button>
        		 </div>
@@ -323,462 +319,8 @@ function deleteMember(){
          <hr class="red-border" />
           <div style="width: 100%; height: 60px; text-align: center;" class="clear-both">
  		  </div>
-            <span class="margin-bottom">플랜 2</span>
-            <button class="btn-pack checkAll">전체선택</button>
-            <button class="btn-pack uncheckAll">전체선택해제</button>
-            <button class="btn-pack">선택삭제</button>
-            <table id="mypage-table-list-air">
-                <tr>
-                	<th><p class="red-text">항공권</p></th>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>시간</th>
-                    <th>in</th>
-                    <th>out</th>
-                    <th>가격</th>
-                </tr>
-            
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                	<th><p class="red-text">호텔/숙박</p></th>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>인원</th>
-                    <th>기간</th>
-                    <th>위치</th>
-                    <th>가격</th>
-                </tr>
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-            </table>
-             <div class="package_list">
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_04.png" width="232px" height="180px">
-                    <div class="each_package_content">
-                        <h3>22000\</h3>
-                    </div>
-                    <p>여행지</p>
-                    </section>
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_06.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>56000\</h3>
-                    </div>
-                    <p>여행지</p>
-                    </section>
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>12000\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>7200\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>18200\</h3>
-                    </div>
-                    <p>여행지</p>
-                </section>
-                </div>
-              </div>
-              <div class="mypage-wrap">
-                <div class="mypage-select-result float-left" id="mypage-result-box">            
-	                <div><span class="center">총합</span></div>
-	                <div><span class="center">예상 금액 123,456원 절약</span></div>
-	                <div><span class="center"><p class="mypage-totalmoney">2,345,567원</p></span></div>            
-       			 </div>
-	       		<button class="btn-big float-left">구매하기</button>
-       		  <div class="mypage-wrap mypage-select-title clear-both">
-         <hr class="red-border" />
-          <div style="width: 100%; height: 60px; text-align: center;" class="clear-both">
  		  </div>
-            <span class="margin-bottom">플랜 3</span>
-            <button class="btn-pack checkAll">전체선택</button>
-            <button class="btn-pack uncheckAll">전체선택해제</button>
-            <button class="btn-pack">선택삭제</button>
-            <table id="mypage-table-list-air">
-                <tr>
-                	<th><p class="red-text">항공권</p></th>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>시간</th>
-                    <th>in</th>
-                    <th>out</th>
-                    <th>가격</th>
-                </tr>
-            
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                	<th><p class="red-text">호텔/숙박</p></th>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>인원</th>
-                    <th>기간</th>
-                    <th>위치</th>
-                    <th>가격</th>
-                </tr>
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-                <tr>
-                	<td>
-                		<div class="chkbx-center">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark"></span>
-							</label>
-						</div>
-                	</td>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-            </table>
-             <div class="package_list">
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_04.png" width="232px" height="180px">
-                    <div class="each_package_content">
-                        <h3>22000\</h3>
-                    </div>
-                    <p>여행지</p>
-                    </section>
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_06.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>56000\</h3>
-                    </div>
-                    <p>여행지</p>
-                    </section>
-                <section class="pack">
-                	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>12000\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>7200\</h3>
-                    </div>
-                    <p>여행지</p>
-                  </section>
-                  <section class="pack">
-                  	<div class="">
-		               	 	<label class="container">
-							  <input type="checkbox">
-							  <span class="checkmark chkbx-pic"></span>
-							</label>
-					</div>
-                    <img src="<%=request.getContextPath() %>/images/main/semiproject_main_crop_08.png" width="232px" height="180px">
-                     <div class="each_package_content">
-                        <h3>18200\</h3>
-                    </div>
-                    <p>여행지</p>
-                </section>
-                </div>
-              </div>
-              <div class="mypage-wrap">
-                <div class="mypage-select-result float-left" id="mypage-result-box">            
-	                <div><span class="center">총합</span></div>
-	                <div><span class="center">예상 금액 123,456원 절약</span></div>
-	                <div><span class="center"><p class="mypage-totalmoney">2,345,567원</p></span></div>            
-       			 </div>
-	       		<button class="btn-big float-left">구매하기</button>
-       		 </div>
-       			 <div style="width: 100%; height: 100px; text-align: center;" class="clear-both">
-       			 </div>
-        </section><!-- end of wishList section -->
-        
-        <section id="mypage-purchaseList">
-        <div name="mypage-section-title">
-            <h1 id="mypage-section-text">구매 내역</h1>
-        </div>
-        <div class="mypage-wrap mypage-select-title">
-            <span class="margin-bottom">항공권</span>
-            <table id="mypage-table-list-air">
-                <tr>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>시간</th>
-                    <th>in</th>
-                    <th>out</th>
-                    <th>가격</th>
-                </tr>
-            
-                <tr>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            
-                <tr>
-                    <td>1</td>
-                    <td>A100239</td>
-                    <td>07:45</td>
-                    <td>대한민국/인천</td>
-                    <td>프랑스/파리</td>
-                    <td>750,999 원</td>
-                </tr>
-            </table>
-        </div>
-        <div class="mypage-wrap mypage-select-title">
-            <span class="margin-bottom">호텔/숙박</span>
-            <table id="mypage-table-list-hotel">
-                <tr>
-                    <th>번호</th>
-                    <th>코드</th>
-                    <th>인원</th>
-                    <th>기간</th>
-                    <th>위치</th>
-                    <th>가격</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>HO11202</td>
-                    <td>3</td>
-                    <td>2020.2.6~2.7</td>
-                    <td>프랑스/파리</td>
-                    <td>690,000 원</td>
-                </tr>
-            </table>
-        </div>
-        <div class="mypage-wrap mypage-select-title">
-            <span class="margin-bottom">관광지 / 관광티켓</span>
-            <table id="mypage-table-list-place">
-                    <tr>
-                        <th>번호</th>
-                        <th>코드</th>
-                        <th>관광티켓명</th>
-                        <th>가격</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>HO11202</td>
-                        <td></td>
-                        <td>690,000 원</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>HO11202</td>
-                        <td></td>
-                        <td>690,000 원</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>HO11202</td>
-                        <td></td>
-                        <td>690,000 원</td>
-                    </tr>
-                </table>
-        </div>
-        <div class="mypage-wrap mypage-select-result_" id="mypage-result-box_">            
-                <div><span class="center">총합</span></div>
-                <div><span class="center">123,456원 절약하셨어요!</span></div>
-                <div><span class="center"><p class="mypage-totalmoney">2,345,567원</p></span></div>            
-        </div>
+       
         </section><!-- end of purchaseList section -->
 
     </section><!-- end of Mypage section -->

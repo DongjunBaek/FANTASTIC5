@@ -85,15 +85,12 @@
             </div>
              <table class="qna_table">
              <tr class="qna_q">
-	           <th>글제목</th>
-	           <th>조회수</th>
-             </tr>
              <%for (QnA q:oneToOne){ %>
              <tr class="qna_q">
              <td onclick="location.href='<%=request.getContextPath()%>/qna/qnaListView?boardNo=<%=q.getBoardNo()%>'"><%=q.getBoardTItle() %></td>
              <td class="readCnt"><%=q.getBoardReadcnt() %>
              <!-- if 답글의 답글은 허용하지않는다 -->
-             <%if(q.getBoardRef() == 0){ %>
+             <%if(q.getBoardRef() == 0 && memberLoggedIn.getMemberId()=="admin"){ %>
              <span onclick="location.href='<%=request.getContextPath()%>/qna/qnaReply?boardRef=<%=q.getBoardNo()%>'">➥</span>
              <%} %>
              </td>

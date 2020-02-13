@@ -14,7 +14,7 @@ public class Member implements Serializable {
 	//페이지내의 업무마다 주석달기  필드
 	private static final long serialVersionUID = 1L;
 	
-	private int mcode;
+	private String mcode;
 	private String memberId;
 	private String password;
 	private String phone;
@@ -31,7 +31,7 @@ public class Member implements Serializable {
 	}
 
 	//파라미터생성자
-	public Member(int mcode, String memberId, String password, String phone, String email, String address,
+	public Member(String mcode, String memberId, String password, String phone, String email, String address,
 			Date enrollDate, double mile, Date birthDay, String memberName) {
 		super();
 		this.mcode = mcode;
@@ -48,12 +48,12 @@ public class Member implements Serializable {
 	
 
 	//getter/setter
-	public int getMcode() {
+	public String getMcode() {
 		return mcode;
 	}
 
 
-	public void setMcode(int mcode) {
+	public void setMcode(String mcode) {
 		this.mcode = mcode;
 	}
 

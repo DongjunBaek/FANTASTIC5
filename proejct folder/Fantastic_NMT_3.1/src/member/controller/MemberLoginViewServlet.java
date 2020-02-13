@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * 내용:Login페이지View단
  *
  */
-@WebServlet("/member/memberLoginView")
+@WebServlet(urlPatterns = {"/member/memberLoginView"})
 public class MemberLoginViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
